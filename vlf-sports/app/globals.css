@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Variables y estilos base del sistema de diseño */
+:root {
+  --brand-blue: #1DA1F2;
+  --light-blue: #E8F4FD;
+  --white: #FFFFFF;
+  --light-gray: #F8F9FA;
+  --medium-gray: #6C757D;
+  --dark-gray: #495057;
+  --black: #000000;
+  --success: #28A745;
+  --warning: #FFC107;
+  --error: #DC3545;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dark-gray);
+  background-color: var(--light-gray);
+}
+
+/* Custom Components usando Tailwind */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-400 text-white border-none rounded-full px-6 py-3 font-medium cursor-pointer transition-all duration-200 inline-flex items-center gap-2 text-sm;
+  }
+  
+  .btn-primary:hover {
+    @apply bg-blue-500 transform -translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply bg-blue-50 text-blue-400 border-none rounded-full px-4 py-2 font-medium cursor-pointer transition-all duration-200 inline-flex items-center gap-2;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-blue-100;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-gray-500 border border-gray-200 rounded-full px-4 py-2 font-medium cursor-pointer transition-all duration-200 inline-flex items-center gap-2;
+  }
+  
+  .btn-ghost:hover {
+    @apply border-blue-400 text-blue-400;
+  }
+  
+  .nav-pill {
+    @apply px-4 py-2 rounded-full no-underline text-gray-500 font-medium transition-all duration-200;
+  }
+  
+  .nav-pill:hover {
+    @apply text-blue-400;
+  }
+  
+  .nav-pill.active {
+    @apply bg-blue-400 text-white;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden;
+  }
+  
+  .ranking-item {
+    @apply p-4 border-b border-gray-100 flex items-center gap-4 transition-colors duration-200;
+  }
+  
+  .ranking-item:hover {
+    @apply bg-gray-50;
+  }
+  
+  .player-avatar {
+    @apply w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-100 flex items-center justify-center text-white font-semibold;
+  }
+  
+  .status-badge {
+    @apply px-2 py-1 rounded-xl text-xs font-medium uppercase tracking-wide;
+  }
+  
+  .status-profesional {
+    @apply bg-green-500 text-white;
+  }
+  
+  .status-avanzado {
+    @apply bg-blue-400 text-white;
+  }
+  
+  .status-intermedio {
+    @apply bg-yellow-400 text-white;
+  }
+  
+  .status-principiante {
+    @apply bg-gray-500 text-white;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-blue);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a8cd8;
+}
