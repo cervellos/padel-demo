@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTR Sports Platform - Dashboard Pádel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>UTR Sports</h1>
+            </div>
+            <nav class="navigation">
+                <div class="nav-pills">
+                    <a href="#" class="nav-pill active">Dashboard</a>
+                    <a href="#" class="nav-pill">Torneos</a>
+                    <a href="#" class="nav-pill">Clubes</a>
+                    <a href="#" class="nav-pill">Estadísticas</a>
+                </div>
+            </nav>
+            <div class="auth-section">
+                <button class="btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn-primary login-btn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Page Title -->
+            <div class="page-header">
+                <h1>Ranking de Jugadores de Pádel</h1>
+                <p>Top 20 jugadores por puntuación individual y parejas</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label>Edad:</label>
+                        <select id="ageFilter" class="filter-select">
+                            <option value="">Todas las edades</option>
+                            <option value="18-25">18-25 años</option>
+                            <option value="26-35">26-35 años</option>
+                            <option value="36-45">36-45 años</option>
+                            <option value="46+">46+ años</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Género:</label>
+                        <select id="genderFilter" class="filter-select">
+                            <option value="">Todos</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="mixto">Mixto</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Nivel:</label>
+                        <select id="levelFilter" class="filter-select">
+                            <option value="">Todos los niveles</option>
+                            <option value="profesional">Profesional</option>
+                            <option value="avanzado">Avanzado</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="principiante">Principiante</option>
+                        </select>
+                    </div>
+                    <button class="btn-ghost reset-filters" onclick="resetFilters()">
+                        <i class="fas fa-undo"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rankings -->
+            <div class="rankings-section">
+                <!-- Individual Ranking -->
+                <div class="ranking-card">
+                    <div class="card-header">
+                        <h2>Ranking Individual</h2>
+                        <div class="metric">
+                            <span class="metric-number">20</span>
+                            <span class="metric-label">Jugadores</span>
+                        </div>
+                    </div>
+                    <div class="ranking-list" id="individualRanking">
+                        <!-- Individual players will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Doubles Ranking -->
+                <div class="ranking-card">
+                    <div class="card-header">
+                        <h2>Ranking Parejas</h2>
+                        <div class="metric">
+                            <span class="metric-number">10</span>
+                            <span class="metric-label">Parejas</span>
+                        </div>
+                    </div>
+                    <div class="ranking-list" id="doublesRanking">
+                        <!-- Doubles teams will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Prompt -->
+            <div class="login-prompt-card">
+                <div class="login-prompt-content">
+                    <h3>¿Quieres ver más jugadores?</h3>
+                    <p>Inicia sesión para acceder al ranking completo y estadísticas detalladas</p>
+                    <button class="btn-primary large">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión para Ver Más
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Redes Sociales</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                        Twitter
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                        Instagram
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                        YouTube
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Explorar</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Torneos</a></li>
+                    <li><a href="#">Clubes</a></li>
+                    <li><a href="#">Jugadores</a></li>
+                    <li><a href="#">Estadísticas</a></li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Eventos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Soporte</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Términos de Uso</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Reportar Problema</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>UTR Sports Platform</h4>
+                <p>La plataforma líder para el seguimiento y análisis del pádel profesional y amateur.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> info@utrsports.com</p>
+                    <p><i class="fas fa-phone"></i> +34 900 123 456</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 UTR Sports Platform. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
