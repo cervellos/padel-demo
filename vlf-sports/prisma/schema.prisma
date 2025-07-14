@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de Usuarios
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  level     String   // principiante, intermedio, avanzado, profesional
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  playerRankings PlayerRanking[]
+  pairsAsPlayer1 Pair[]          @relation("Player1")
+  pairsAsPlayer2 Pair[]          @relation("Player2")
+  matchesAsOpponent Match[]      @relation("MatchOpponent")
+
+  @@map("users")
+}
+
+// Modelo de Clubes
+model Club {
+  id          Int      @id @default(autoincrement())
+  name        String
+  location    String
+  courts      Int
+  rating      Float
+  members     Int
+  facilities  String[] // Array de facilidades
+  type        String   // Premium, Estándar, Básico
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  tournaments Tournament[]
+
+  @@map("clubs")
+}
+
+// Modelo de Torneos
+model Tournament {
+  id           Int      @id @default(autoincrement())
+  name         String
+  date         String
+  location     String
+  participants Int
+  prize        String
+  status       String   // Inscripciones Abiertas, En Progreso, Finalizado, Próximamente
+  type         String   // Profesional, Amateur, Juvenil
+  clubId       Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relaciones
+  club    Club?   @relation(fields: [clubId], references: [id])
+  matches Match[]
+
+  @@map("tournaments")
+}
+
+// Modelo de Rankings de Jugadores
+model PlayerRanking {
+  id       Int @id @default(autoincrement())
+  userId   Int
+  position Int
+  points   Int
+  level    String
+
+  // Relaciones
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("player_rankings")
+}
+
+// Modelo de Parejas
+model Pair {
+  id        Int      @id @default(autoincrement())
+  player1Id Int
+  player2Id Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  player1     User          @relation("Player1", fields: [player1Id], references: [id])
+  player2     User          @relation("Player2", fields: [player2Id], references: [id])
+  pairRanking PairRanking[]
+  matches     Match[]
+
+  @@map("pairs")
+}
+
+// Modelo de Rankings de Parejas
+model PairRanking {
+  id       Int @id @default(autoincrement())
+  pairId   Int
+  position Int
+  points   Int
+
+  // Relaciones
+  pair Pair @relation(fields: [pairId], references: [id])
+
+  @@map("pair_rankings")
+}
+
+// Modelo de Partidos
+model Match {
+  id           Int       @id @default(autoincrement())
+  date         DateTime
+  tournamentId Int?
+  pairId       Int
+  opponentId   Int
+  score        String
+  result       String    // Ganado, Perdido
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relaciones
+  tournament Tournament? @relation(fields: [tournamentId], references: [id])
+  pair       Pair        @relation(fields: [pairId], references: [id])
+  opponent   User        @relation("MatchOpponent", fields: [opponentId], references: [id])
+
+  @@map("matches")
+}

@@ -6,10 +6,21 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:start": "./scripts/db.sh start",
+    "db:stop": "./scripts/db.sh stop",
+    "db:status": "./scripts/db.sh status",
+    "db:logs": "./scripts/db.sh logs",
+    "db:connect": "./scripts/db.sh connect",
+    "db:backup": "./scripts/db.sh backup",
+    "db:reset": "./scripts/db.sh reset"
   },
   "dependencies": {
+    "@prisma/client": "^6.11.1",
+    "@types/pg": "^8.15.4",
     "next": "15.3.4",
+    "pg": "^8.16.3",
+    "prisma": "^6.11.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

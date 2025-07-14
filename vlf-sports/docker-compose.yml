@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: vlf-sports-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vlf_sports_dev
+      POSTGRES_USER: vlf_user
+      POSTGRES_PASSWORD: vlf_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - vlf-network
+
+  # pgAdmin para gestión visual de la base de datos
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: vlf-sports-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@vlfsports.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - vlf-network
+    depends_on:
+      - postgres
+
+  # Redis para caché (opcional)
+  redis:
+    image: redis:7-alpine
+    container_name: vlf-sports-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - vlf-network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  redis_data:
+
+networks:
+  vlf-network:
+    driver: bridge 
