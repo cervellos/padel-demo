@@ -34,3 +34,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+🔧 Comandos Útiles para Gestión
+Tienes scripts npm configurados para gestionar la base de datos:
+Apply to eslint.confi...
+Run
+🌐 Acceso a Servicios
+Aplicación: http://localhost:3000
+pgAdmin: http://localhost:5050 (admin@vlfsports.com / admin123)
+PostgreSQL: localhost:5432 (vlf_user / vlf_password)
